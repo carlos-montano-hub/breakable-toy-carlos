@@ -1,10 +1,8 @@
-from curses.ascii import NUL
-import importlib
-import re
 from Balance import generateBalance
 from ReadData import readData
 from Util import *
 from ClassVar import *
+from Register import *
 
 
 def printAllRawData():
@@ -15,5 +13,5 @@ def printAllRawData():
 
 
 readData()
-# print(Ledger.transactionsDictionaries)
 generateBalance()
+printRegister()

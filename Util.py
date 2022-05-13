@@ -5,11 +5,9 @@ def spaceListLine(Line):
 
 
 def dllListLine(line):
-    # print(line)
     searcher = r"$"
     # split the line readed into a list, taking the "$" as separators "re.split(r"$",line)" just does not work ¯\_(ツ)_/¯
     listedLine = line.split(searcher)
-    # print(listedLine)
     return listedLine
 
 def pointsListConcept(concept):

@@ -18,3 +18,8 @@ class Ledger:  # I use this class to store global variables
     dateCounter = int(10)
 
     listedValues = []
+    
+    taxableValue = "" #usually income
+    taxName = ""  #usually tithe
+    taxConcept = "" #usually liabilities:tithe
+    taxValue = float(0) #percentage

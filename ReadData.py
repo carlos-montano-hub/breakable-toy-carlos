@@ -25,7 +25,6 @@ def getState(line):  # get the state of the program. may be redundancy
 def searchTax(line):
     search = r"= /^"
     if search in line:
-        #print(line.split(r"/^")[1][:-2])
         Ledger.taxableValue = line.split(r"/^")[1][:-2]
         taxConcept = Ledger.data.readline()
         taxConcept = taxConcept.replace(" ", "")
@@ -35,8 +34,6 @@ def searchTax(line):
         Ledger.taxValue = float(taxConcept[1])
         Ledger.taxConcept = taxConcept[0] + "99"
         Ledger.taxName = taxConcept[0].split(r":")[-1]
-        #print(taxConcept)
-
 
 
 def defineDateKey(line):
