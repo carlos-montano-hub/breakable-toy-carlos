@@ -1,12 +1,7 @@
 # breakable-toy-carlos
 
-el codigo corre directamente la funcion balance, la funcion register y la funcion print en el archivo main, esperando un archivo "data.dat" en el mismo directorio
+The file "Main.py" accepts the commands "Balance", "Register" and "Print". No flag implemented at the momment and the code expects a "Data.dat" file to read the data
 
-
-Se necesita la libreria "Treelib"
-
-
-
-the main.py file runs the functions balance, register and print automatically. The main.py file expects a data.dat file in the same directory
-
-Required library "treelib"
+Required libraries:
+  Treelib
+  Click
