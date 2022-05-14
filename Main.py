@@ -1,4 +1,5 @@
 from Balance import generateBalance
+from Print import printAll
 from ReadData import readData
 from Util import *
 from ClassVar import *
@@ -15,3 +16,4 @@ def printAllRawData():
 readData()
 generateBalance()
 printRegister()
+printAll()
