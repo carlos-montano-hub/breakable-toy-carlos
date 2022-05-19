@@ -89,24 +89,24 @@ def generateBalance():
             return tree[node].data
 
     def printTree(node):
+        if not tree.get_node(node).is_root():
 
-        if tree.get_node(node).is_leaf():
+            nodeIdentifier = ""
 
-            if (tree[node].identifier)[-1].isdigit():
-                print(r"$", str(tree[node].data).rjust(
-                    longestStringLenght), " " * tree.level(node) * 3, (tree[node].identifier)[:-1])
-            else:
-                print(r"$", str(tree[node].data).rjust(
-                    longestStringLenght), " " * tree.level(node) * 3, tree[node].identifier)
-        else:
-            if (tree[node].identifier)[-1].isdigit():
-                print(r"$", str(tree[node].data).rjust(
-                    longestStringLenght), " " * tree.level(node) * 3, (tree[node].identifier)[:-1])
+            splittedNodeIdentifier = str((tree[node].identifier)).split(r":")
 
-            elif tree[node].identifier != "balance":
-                print(r"$", str(tree[node].data).rjust(
-                    longestStringLenght), " " * tree.level(node) * 3, tree[node].identifier)
+            for i in range(0, len(splittedNodeIdentifier)-1):
 
+                if splittedNodeIdentifier[i][-1].isdigit():
+                    splittedNodeIdentifier[i] = splittedNodeIdentifier[i][:-1]
+
+            for name in splittedNodeIdentifier:
+                nodeIdentifier += name + r":"
+            nodeIdentifier = nodeIdentifier[:-1]
+            print(r"$", str(tree[node].data).rjust(
+                longestStringLenght), " " * tree.level(node) * 4, nodeIdentifier)
+
+        if not tree.get_node(node).is_leaf():
             for child in tree.children(node):
                 printTree(child.identifier)
 
@@ -122,15 +122,16 @@ def generateBalance():
                     tree.remove_node(tree.children(newName)[0].identifier)
 
     def addTithe(tithe):
-        if not tree[tithe].is_root():
-            taxedData = tree.parent(tithe).data
-            taxableData = tree[Ledger.taxableValue].data
-            tree.update_node(tree.parent(tithe).identifier, data=round(
-                taxedData + taxableData * Ledger.taxValue - 0.1, 1))
-            addTithe(tree.parent(tithe).identifier)
-        if tree[tithe].is_leaf():
-            tree.update_node(tithe, data=round(
-                taxableData * Ledger.taxValue, 1))
+        if not tithe == "":
+            if not tree[tithe].is_root():
+                taxedData = tree.parent(tithe).data
+                taxableData = tree[Ledger.taxableValue].data
+                tree.update_node(tree.parent(tithe).identifier, data=round(
+                    taxedData + taxableData * Ledger.taxValue - 0.1, 1))
+                addTithe(tree.parent(tithe).identifier)
+            if tree[tithe].is_leaf():
+                tree.update_node(tithe, data=round(
+                    taxableData * Ledger.taxValue, 1))
 
     def finalAddition(root):
         sum = float(0)

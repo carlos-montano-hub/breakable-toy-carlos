@@ -14,7 +14,7 @@ def getState(line):  # get the state of the program. may be redundancy
         Ledger.state = "nothing"  # null state for change o element
 
     # I need the next state only when a date key has been defined and the line starts with a "  " and a letter and the state is correct
-    if re.search("^  [A-Za-z]", line) and Ledger.state == "accountReady":
+    if (re.search("^  [A-Za-z]", line) or re.search("^	[A-Za-z]", line)) and Ledger.state == "accountReady":
         Ledger.state = "accountConcepts"
 
     # if the line starts with a number, it probably is a date, so start a movement
@@ -37,7 +37,8 @@ def searchTax(line):
 
 
 def defineDateKey(line):
-
+    Ledger.balanceValue = float(0)
+    
     commentSplited = ""  # initialice the variable, may be redundant. to test later
 
     listedLine = spaceListLine(line)  # return a list separated by spaces
@@ -57,8 +58,7 @@ def defineDateKey(line):
 
         if not Ledger.transactionsDictionaries[dateKey]:
             # add the comment with the "comment" key to the dictionary with the datekey
-            Ledger.transactionsDictionaries[dateKey] = {
-                "comment": commentSplited}
+            Ledger.transactionsDictionaries[dateKey] = {"comment": commentSplited}
 
         commentSplited = ""  # null the comment so it can be used again
         # append the date to a list to be stored in the class
@@ -88,15 +88,15 @@ def readData():
         if Ledger.state == "accountStarted":
             defineDateKey(line)
 
-        if Ledger.state == "accountConcepts" and re.search("^  [A-Za-z]", line):
+        if Ledger.state == "accountConcepts" and (re.search("^  [A-Za-z]", line) or re.search("^	[A-Za-z]", line)):
             defineCashFlow(line)
 
         if not line:  # if nothing else to read: finish the program
             Ledger.data.close()
             break
-    
-    Ledger.transactionsDictionaries["Tax"] = {}
-    Ledger.transactionsDictionaries["Tax"][Ledger.taxConcept] = Ledger.taxValue
+    if Ledger.taxConcept != "":
+        Ledger.transactionsDictionaries["Tax"] = {}
+        Ledger.transactionsDictionaries["Tax"][Ledger.taxConcept] = Ledger.taxValue
 
 
 def defineCashFlow(line):

@@ -36,6 +36,10 @@ def printRegister():
                     workList.append(sum)
                     workArray.append(workList)
                     workList = []
+    linesDash = "-"* int(round((40 + 35 + 10 + 10)*.5, 1))
+    print("\n" + linesDash + " REGISTER " + linesDash + "\n")
 
     for row in workArray:
         print(f"{row[0]: <40} {row[1]: <35} {row[2]: >10} {row[3]: >10}")
+        
+    print(linesDash * 2 + "-" * 11 + "\n")

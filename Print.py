@@ -26,3 +26,5 @@ def printAll():
 
     for row in workArray:
         print(f"{row[0]: <35} {row[1]: >10}")
+    
+    print("\n")
