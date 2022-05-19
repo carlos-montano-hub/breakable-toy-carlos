@@ -1,6 +1,6 @@
 # breakable-toy-carlos
 
-The file "Main.py" accepts the commands "Balance", "Register" and "Print". No flag implemented at the momment and the code expects a "Data.dat" file to read the data
+The file "Main.py" accepts the commands "Balance", "Register" and "Print". Only the -f flag implemented at the mommen and the code does not work very well with BTC
 
 Required libraries:
   Treelib
